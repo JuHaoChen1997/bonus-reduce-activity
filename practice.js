@@ -48,7 +48,15 @@ function wordCounts(sentence) {
  * product([4, 0.5, 13]);
  * => 26
  */
-function product(nums) {}
+function product(nums) {
+  function reducer(product, num){
+    return product * num;
+  }
+
+  return nums.reduce(reducer,1);
+}
+
+//console.log(product([4, 0.5, 13]));
 
 /**
  * Finds the maximum value in an array of numbers.
@@ -60,7 +68,18 @@ function product(nums) {}
  * max([-20, 0, -4, 18, 6, 12]);
  * => 18;
  */
-function max(nums) {}
+function max(nums) {
+  function reducer(largest,num){
+    if(largest < num){
+      return num;
+    }else{
+      return largest;
+    }
+  }
+
+  return nums.reduce(reducer,nums[0]);
+}
+console.log(max([-20, 0, -4, 18, 6, 12]));
 
 /**
  * Given an array of quiz bowl participants, finds the total score for each team.
@@ -83,4 +102,29 @@ function max(nums) {}
  * teamScores(participants);
  * => { tigers: 13, meerkats: 12, pengolins: 12}
  */
-function teamScores(participants) {}
+
+ let participants = [
+   { name: "Nora", team: "tigers", score: 2},
+  { name: "Jordan", team: "meerkats", score: 5},
+  { name: "Cristobal", team: "tigers", score: 5},
+  { name: "Cassidy", team: "pangolins", score: 7},
+  { name: "Teyanna", team: "pangolins", score: 1},
+  { name: "Sparky", team: "meerkats", score: 3},
+  { name: "Rayvon", team: "tigers", score: 6},
+  { name: "Daniel", team: "pangolins", score: 4},
+  { name: "Rebecca", team: "meerkats", score: 4}];
+
+function teamScores(participants) {
+  function reducer(teamScore,currentMember){
+    if(teamScore[currentMember.team]){
+      teamScore[currentMember.team] += currentMember.score;
+      return teamScore;
+    }else{
+      teamScore[currentMember.team] = currentMember.score;
+      return teamScore;
+    }
+  }
+  return participants.reduce(reducer,{});
+}
+
+console.log(teamScores(participants))
